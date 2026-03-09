@@ -4,7 +4,10 @@ import string
 letters = string.ascii_letters
 digits = string.digits
 special = string.punctuation
+dig_ip=True
+spc_ip=True
 
+#Password generator logic
 def pass_gen (dig,hasdigits=True,hasspecial=True):
     char=letters
     if(hasdigits):
@@ -26,32 +29,30 @@ def pass_gen (dig,hasdigits=True,hasspecial=True):
     random.shuffle(pwd)
 
     return "".join(pwd)
-    
-# def handle_ip(dig_ip,spc_ip):
-#     if (dig_ip=='y' or dig_ip=='Y'):
-#      dig_ip=True
-#     else:
-#      dig_ip==False
-#     if (spc_ip=='y' or spc_ip=='Y'):
-#         spc_ip=True
-#     else:
-#         spc_ip==False
+
+#Handle the digit and special character choice    
+def handle_ip(dig,spc):
+    ans=[]
+    if (dig=='y' or dig=='Y'):
+     ans.append(True)
+    else:
+     ans.append(False)
+    if (spc=='y' or spc=='Y'):
+        ans.append(True)
+    else:
+        ans.append(False)
+    return ans
 
         
-
-
+#User Input
 num=int(input('Enter the minimum length of the password : '))
 dig_ip=input("Do you want digits in your password (y/n) : ")
 spc_ip=input("Do you want special characters in your password (y/n) : ")
-if (dig_ip=='y' or dig_ip=='Y'):
-    dig_ip=True
-else:
-    dig_ip=False
-if (spc_ip=='y' or spc_ip=='Y'):
-    spc_ip=True
-else:
-    spc_ip=False
-ans=pass_gen(num,dig_ip,spc_ip)
+handle_ip(dig_ip,spc_ip)
+
+handlr=handle_ip(dig_ip,spc_ip)
+
+ans=pass_gen(num,handlr[0],handlr[1])
 print('The generated password is :')
 print(ans)
 
